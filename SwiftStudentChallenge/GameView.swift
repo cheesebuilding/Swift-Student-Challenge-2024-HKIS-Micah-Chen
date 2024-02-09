@@ -1,18 +1,14 @@
-//
-//  GameView.swift
-//  SwiftStudentChallenge
-//
-//  Created by Micah Chen on 2/6/24.
-//
-
 import SwiftUI
+import SpriteKit
 
 struct GameView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    var scene: SKScene {
+        let scene = SKScene(fileNamed: "GameScene")
+        scene?.scaleMode = .fill
+        return scene!
     }
-}
 
-#Preview {
-    GameView()
+    var body: some View {
+        SpriteView(scene: scene).edgesIgnoringSafeArea(.all)
+    }
 }

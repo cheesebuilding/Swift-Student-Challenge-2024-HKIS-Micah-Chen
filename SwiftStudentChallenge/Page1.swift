@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct Page1: View {
+    @State private var isButtonPressed = false
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -31,9 +33,15 @@ struct Page1: View {
                             .background(Color.red)
                             .foregroundColor(.white)
                             .cornerRadius(20)
-                            .offset(y: -50)
+                            .scaleEffect(isButtonPressed ? 0.9 : 1.0)
+                            .animation(.easeInOut, value: isButtonPressed)
                     }
                     .isDetailLink(false)
+                    .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                        isButtonPressed = pressing
+                    }, perform: {})
+                    .animation(.easeInOut, value: isButtonPressed)
+                    .offset(y: -50)
                 }
             }
         }

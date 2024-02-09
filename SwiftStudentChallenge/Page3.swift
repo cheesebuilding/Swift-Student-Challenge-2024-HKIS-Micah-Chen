@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct Page3: View {
+    @State private var isButtonPressed = false
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -23,7 +25,7 @@ struct Page3: View {
                         .offset(x: -8)
                         .frame(maxWidth: .infinity, alignment: .center)
                     Spacer()
-                    NavigationLink(destination: Page3()) {
+                    NavigationLink(destination: GameView().navigationBarBackButtonHidden(true)) {
                         Text("Go!")
                             .font(.custom("Apple SD Gothic Neo", size: 45))
                             .padding(.horizontal, 30)
@@ -31,8 +33,14 @@ struct Page3: View {
                             .background(Color.red)
                             .foregroundColor(.white)
                             .cornerRadius(20)
-                            .offset(y: -50)
+                            .scaleEffect(isButtonPressed ? 0.9 : 1.0)
+                            .animation(.easeInOut, value: isButtonPressed)
                     }
+                    .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                        isButtonPressed = pressing
+                    }, perform: {})
+                    .animation(.easeInOut, value: isButtonPressed)
+                    .offset(y: -50)
                 }
             }
         }

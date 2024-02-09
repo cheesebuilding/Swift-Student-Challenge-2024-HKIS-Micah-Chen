@@ -35,10 +35,13 @@ struct MainMenuView: View {
                             .foregroundColor(.white)
                             .cornerRadius(20)
                             .scaleEffect(isButtonPressed ? 0.9 : 1.0)
-                            .offset(y: -50)
+                            .animation(.easeInOut, value: isButtonPressed)
                     }
                     .isDetailLink(false)
-                    .animation(.easeInOut)
+                    .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                        isButtonPressed = pressing
+                    }, perform: {})
+                    .animation(.easeInOut, value: isButtonPressed)
 
                     Spacer()
                 }
